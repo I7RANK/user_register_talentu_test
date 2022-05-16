@@ -1,5 +1,5 @@
 <template>
-  <header class="px-1 py-3 bg-talentu">
+  <header class="px-2 py-3 flex items-center">
     <a href="https://www.talentu.co/" target="_blank" rel="noopener noreferrer">
       <img
         class="max-h-11"
@@ -15,4 +15,7 @@ export default {};
 </script>
 
 <style>
+  header {
+    background: var(--bg-talentu);
+  }
 </style>
