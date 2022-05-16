@@ -23,6 +23,7 @@
     </div>
 
     <div>
+      <button class="my-5 py-3 flex-grow rounded-full hover:opacity-95 active:opacity-90">Create</button>
     </div>
   </form>
 </template>
@@ -49,5 +50,11 @@ export default {};
 
 .user-form input:focus {
   border: var(--input-color-2) 2px solid;
+}
+
+.user-form button {
+  background: var(--bg-talentu);
+  min-width: 212px;
+  color: var(--background-secondary);
 }
 </style>
