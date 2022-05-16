@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      'talentu': '#1a1550'
+    }
   },
   plugins: [],
 }
