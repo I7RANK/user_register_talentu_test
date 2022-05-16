@@ -1,15 +1,17 @@
 <template>
   <Header />
 
-  <h1 class="bg-pink-800">hey</h1>
+  <Main />
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import Main from './components/Main.vue';
 
 export default {
   components: {
     Header,
+    Main,
   }
 };
 </script>
