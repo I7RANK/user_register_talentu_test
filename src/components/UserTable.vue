@@ -1,7 +1,7 @@
 <template>
-  <table class="table-auto min-w-full">
-    <thead class="shadow-md text-lg">
-      <tr>
+  <table class="user-table table-auto min-w-full rounded-t-2xl">
+    <thead class="text-lg">
+      <tr class="">
         <th class="font-bold">Id</th>
         <th class="font-bold">Nombre</th>
         <th class="font-bold">Edad</th>
@@ -32,6 +32,6 @@ export default {};
 
 <style>
 table tbody tr:nth-child(2n) {
-  background: #eee;
+  background: var(--background);
 }
 </style>
