@@ -1,6 +1,6 @@
 <template>
-  <table class="user-table table-auto min-w-full rounded-t-2xl">
-    <thead class="text-lg">
+  <table class="user-table table-auto min-w-full rounded-t-2xl border-2">
+    <thead class="text-lg border-b-2">
       <tr class="">
         <th class="font-bold">Id</th>
         <th class="font-bold">Nombre</th>
@@ -12,7 +12,12 @@
     <tbody class="text-center">
       <tr :key="user.id" v-for="user in userList">
         <td>{{ user.id }}</td>
-        <td>{{ `${user.first_name} ${user.last_name}` }}</td>
+        <td>
+          <div class="flex items-center justify-start w-52 p-3 bg-transparent">
+            <img class="rounded-full w-14 ml-5 mr-2" :src="user.avatar" alt="user avatar">
+            <span class="text-left">{{ `${user.first_name} ${user.last_name}` }}</span>
+          </div>
+        </td>
         <td>{{ userAge(user) }}</td>
         <td>{{ user.email }}</td>
       </tr>

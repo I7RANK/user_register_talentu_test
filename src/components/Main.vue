@@ -1,10 +1,10 @@
 <template>
   <main class="my-5 px-3 lg:grid lg:grid-cols-3 gap-8">
-    <div class="mb-5 rounded-2xl shadow-md py-5 max-w-md m-auto">
+    <div class="mb-5 rounded-2xl shadow-md py-5 max-w-md mx-auto self-start">
       <UserForm @userListUpdated="this.userListUpdated()"/>
     </div>
 
-    <div class="table-content lg:col-span-2 mb-5 rounded-2xl shadow-md py-5 overflow-auto">
+    <div class="table-content lg:col-span-2 mb-5 rounded-2xl shadow-md p-5 overflow-auto">
       <UserTable :userList="userList" v-if="responseStatus === 200"/>
     </div>
   </main>
