@@ -1,7 +1,7 @@
 <template>
   <main class="my-5 px-3 lg:grid lg:grid-cols-3 gap-8">
     <div class="mb-5 rounded-2xl shadow-md py-5">
-      <UserForm />
+      <UserForm @userListUpdated="this.userListUpdated()"/>
     </div>
 
     <div class="lg:col-span-2 mb-5 rounded-2xl shadow-md py-5">
@@ -41,6 +41,9 @@ export default {
         console.log('Error! Could not reach the API. ' + error);
       }
     },
+    userListUpdated() {
+      this.userList = JSON.parse(localStorage.getItem('userList'));
+    }
   },
   mounted() {
     this.getUsers();
