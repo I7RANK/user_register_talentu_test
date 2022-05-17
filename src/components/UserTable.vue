@@ -13,7 +13,7 @@
       <tr :key="user.id" v-for="user in userList">
         <td>{{ user.id }}</td>
         <td>{{ `${user.first_name} ${user.last_name}` }}</td>
-        <td>{{ getRandomAge() }}</td>
+        <td>{{ userAge(user) }}</td>
         <td>{{ user.email }}</td>
       </tr>
     </tbody>
@@ -34,6 +34,13 @@ export default {
       max = Math.floor(max);
       return Math.floor(Math.random() * (max - min + 1) + min);
     },
+    userAge(user) {
+      if (!user.birth_date) return this.getRandomAge();
+
+      const ageDifMs = Date.now() - new Date(user.birth_date).getTime();
+      const ageDate = new Date(ageDifMs);
+      return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
   },
   mounted() {},
 };
