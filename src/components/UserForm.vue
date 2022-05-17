@@ -68,6 +68,7 @@ export default {
 
       localStorage.setItem('userList', JSON.stringify(userList));
       this.$emit('userListUpdated');
+      this.clearAllInputs();
       this.showFormAlert('Usuario agregado!!');
     },
     checkInput() {
@@ -126,6 +127,12 @@ export default {
     changeBorderColor(inputElement, color='#f00') {
       inputElement.style.borderColor = color;
       inputElement.focus();
+    },
+    clearAllInputs() {
+      this.$refs.inEmail.value = '';
+      this.$refs.inFirstName.value = '';
+      this.$refs.inLastName.value = '';
+      this.$refs.inBirthDate.value = '';
     }
   },
 };

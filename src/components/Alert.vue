@@ -1,5 +1,5 @@
 <template>
-  <div class="alert-content absolute right-0 z-10 py-5 px-2 rounded-lg shadow-md flex justify-between items-center">
+  <div class="alert-content fixed right-4 z-10 py-5 px-2 rounded-lg shadow-md flex justify-between items-center">
     <p class="text-center max-w-full w-3/4 text-slate-100">{{ msg }}</p>
   </div>
 </template>
