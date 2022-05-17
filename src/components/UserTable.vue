@@ -10,24 +10,33 @@
     </thead>
 
     <tbody class="text-center">
-      <tr>
-        <td>1</td>
-        <td>Malcolm Lockyer</td>
-        <td>1961</td>
-        <td>Criminal</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>The Eagles</td>
-        <td>1972</td>
-        <td>Criminal</td>
+      <tr :key="user.id" v-for="user in userList">
+        <td>{{ user.id }}</td>
+        <td>{{ `${user.first_name} ${user.last_name}` }}</td>
+        <td>{{ getRandomAge() }}</td>
+        <td>{{ user.email }}</td>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  props: {
+    userList: Array,
+  },
+  methods: {
+    getRandomAge(min = 18, max = 70) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    },
+  },
+  mounted() {},
+};
 </script>
 
 <style>

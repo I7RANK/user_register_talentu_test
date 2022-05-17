@@ -5,7 +5,7 @@
     </div>
 
     <div class="lg:col-span-2 mb-5 rounded-2xl shadow-md py-5">
-      <UserTable />
+      <UserTable :userList="userList" v-if="responseStatus === 200"/>
     </div>
   </main>
 </template>
@@ -15,10 +15,36 @@ import UserTable from './UserTable.vue'
 import UserForm from './UserForm.vue'
 
 export default {
+  data() {
+    return {
+      userData: { data: [] },
+      userList: [],
+      responseStatus: 0,
+    };
+  },
   components: {
     UserTable,
     UserForm,
-  }
+  },
+  methods: {
+    async getUsers() {
+      const url = 'https://reqres.in/api/users?page=1';
+
+      try {
+        const res = await fetch(url);
+        this.userData = await res.json();
+        this.userList = this.userData.data;
+        this.responseStatus = res.status;
+
+        localStorage.setItem('userList', JSON.stringify(this.userList));
+      } catch (error) {
+        console.log('Error! Could not reach the API. ' + error);
+      }
+    },
+  },
+  mounted() {
+    this.getUsers();
+  },
 };
 </script>
 
