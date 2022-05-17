@@ -47,6 +47,8 @@ import Alert from './Alert.vue';
 const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 const ALERT_TIME = 3400;
 
+let timeControl;
+
 export default {
   data() {
     return {
@@ -107,6 +109,11 @@ export default {
         this.changeBorderColor(this.$refs.inBirthDate);
         return;
       }
+      if (Date.now() < Date.parse(birthDateValue)) {
+        this.showFormAlert('No puedes nacer en el futuro');
+        this.changeBorderColor(this.$refs.inBirthDate);
+        return;
+      }
 
       return {
         id: Date.now(),
@@ -120,7 +127,8 @@ export default {
     showFormAlert(msg='Hola!') {
       this.msgAlert = msg;
       this.showAlert = true;
-      setTimeout(() => {
+      clearInterval(timeControl);
+      timeControl = setTimeout(() => {
         this.showAlert = false;
       }, ALERT_TIME);
     },
