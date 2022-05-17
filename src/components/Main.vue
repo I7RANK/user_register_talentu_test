@@ -4,7 +4,7 @@
       <UserForm @userListUpdated="this.userListUpdated()"/>
     </div>
 
-    <div class="lg:col-span-2 mb-5 rounded-2xl shadow-md py-5">
+    <div class="table-content lg:col-span-2 mb-5 rounded-2xl shadow-md py-5 overflow-auto">
       <UserTable :userList="userList" v-if="responseStatus === 200"/>
     </div>
   </main>
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style>
-  main div {
-    background: var(--background-secondary);
-  }
+main div {
+  background: var(--background-secondary);
+}
 </style>
