@@ -43,4 +43,12 @@ export default {
 table tbody tr:nth-child(2n) {
   background: var(--background);
 }
+
+table thead tr th {
+  padding: 0 8px;
+}
+
+table tbody tr td {
+  padding: 0 8px;
+}
 </style>
