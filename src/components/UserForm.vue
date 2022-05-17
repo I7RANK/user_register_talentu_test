@@ -1,25 +1,34 @@
 <template>
   <div class="user-form flex flex-col items-center px-8">
+    <Alert v-if="showAlert" :msg="msgAlert" />
     <h2 class="text-3xl text-center my-5">Agregar nuevo usuario</h2>
 
     <div class="flex flex-col my-2">
       <label for="email">Email*</label>
-      <input id="email" type="email" ref="inEmail"/>
+      <input id="email" type="email" ref="inEmail" @keydown="(e) => {
+        changeBorderColor(e.target, 'var(--input-color)')
+      }"/>
     </div>
 
     <div class="flex flex-col my-2">
       <label for="first-name">Nombre(s)*</label>
-      <input id="first-name" type="text" ref="inFirstName"/>
+      <input id="first-name" type="text" ref="inFirstName" @keydown="(e) => {
+        changeBorderColor(e.target, 'var(--input-color)')
+      }"/>
     </div>
 
     <div class="flex flex-col my-2">
       <label for="last-name">Apellido(s)*</label>
-      <input id="last-name" type="text" ref="inLastName"/>
+      <input id="last-name" type="text" ref="inLastName" @keydown="(e) => {
+        changeBorderColor(e.target, 'var(--input-color)')
+      }"/>
     </div>
 
     <div class="flex flex-col my-2">
       <label for="birth-date">Fecha nacimiento*</label>
-      <input id="birth-date" type="date" ref="inBirthDate"/>
+      <input id="birth-date" type="date" ref="inBirthDate" @click="(e) => {
+        changeBorderColor(e.target, 'var(--input-color)')
+      }"/>
     </div>
 
     <div>
@@ -33,9 +42,21 @@
 </template>
 
 <script>
+import Alert from './Alert.vue';
+
 const EMAIL_REGEX = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+const ALERT_TIME = 3400;
 
 export default {
+  data() {
+    return {
+      showAlert: false,
+      msgAlert: '',
+    };
+  },
+  components: {
+    Alert,
+  },
   methods: {
     createUpdateUser() {
       const userList = JSON.parse(localStorage.getItem('userList'));
@@ -47,30 +68,42 @@ export default {
 
       localStorage.setItem('userList', JSON.stringify(userList));
       this.$emit('userListUpdated');
-      console.log('Created.');
+      this.showFormAlert('Usuario agregado!!');
     },
     checkInput() {
       const emailChecked = this.$refs.inEmail.value.match(EMAIL_REGEX);
+      const emptyMsg = 'No se permiten campos vacios';
+
+      if (this.$refs.inEmail.value === '') {
+        this.showFormAlert(emptyMsg);
+        this.changeBorderColor(this.$refs.inEmail);
+        return;
+      }
+
       if (!emailChecked || emailChecked.input !== emailChecked[0]) {
-        this.showFormAlert('Tipo de email invalido', this.$refs.inEmail);
+        this.showFormAlert('Tipo de email invalido');
+        this.changeBorderColor(this.$refs.inEmail);
         return;
       }
 
       const firstNameValue = this.$refs.inFirstName.value;
       if (firstNameValue === '') {
-        this.showFormAlert('No se permiten campos vacios', this.$refs.inFirstName);
+        this.showFormAlert(emptyMsg);
+        this.changeBorderColor(this.$refs.inFirstName);
         return;
       }
 
       const lastNameValue = this.$refs.inLastName.value;
       if (lastNameValue === '') {
-        this.showFormAlert('No se permiten campos vacios', this.$refs.inLastName);
+        this.showFormAlert(emptyMsg);
+        this.changeBorderColor(this.$refs.inLastName);
         return;
       }
 
       const birthDateValue = this.$refs.inBirthDate.value;
       if (birthDateValue === '') {
-        this.showFormAlert('No se permiten campos vacios', this.$refs.inBirthDate);
+        this.showFormAlert(emptyMsg);
+        this.changeBorderColor(this.$refs.inBirthDate);
         return;
       }
 
@@ -83,9 +116,16 @@ export default {
         avatar: 'https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png',
       };
     },
-    showFormAlert(msg='Bad input', inputElement) {
-      console.log(msg);
-      inputElement.style.borderColor = '#f00';
+    showFormAlert(msg='Hola!') {
+      this.msgAlert = msg;
+      this.showAlert = true;
+      setTimeout(() => {
+        this.showAlert = false;
+      }, ALERT_TIME);
+    },
+    changeBorderColor(inputElement, color='#f00') {
+      inputElement.style.borderColor = color;
+      inputElement.focus();
     }
   },
 };
