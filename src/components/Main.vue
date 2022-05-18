@@ -5,6 +5,7 @@
     </div>
 
     <div class="table-content lg:col-span-2 mb-5 rounded-2xl shadow-md p-5 overflow-auto relative">
+      <Spinner v-if="!responseStatus"/>
       <UserTable :userList="userList" v-if="responseStatus === 200"/>
 
       <div class="pagination-content w-full">
@@ -29,6 +30,7 @@
 <script>
 import UserTable from './UserTable.vue'
 import UserForm from './UserForm.vue'
+import Spinner from './Spinner.vue'
 
 export default {
   data() {
@@ -42,6 +44,7 @@ export default {
   components: {
     UserTable,
     UserForm,
+    Spinner,
   },
   watch: {
     currentPage() {
@@ -51,6 +54,8 @@ export default {
   methods: {
     async getUsers(page=1) {
       const url = `https://reqres.in/api/users?page=${page}`;
+
+      this.responseStatus = 0;
 
       try {
         const res = await fetch(url);
