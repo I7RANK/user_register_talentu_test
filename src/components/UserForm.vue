@@ -167,8 +167,13 @@ export default {
 }
 
 .user-form button {
-  background: var(--bg-talentu);
+  border: var(--input-color-2) 2px solid;
   min-width: 212px;
-  color: var(--background-secondary);
+  color: var(--text-color);
+}
+
+.user-form button:hover {
+  opacity: 70%;
+  color: var(--input-color-2);
 }
 </style>

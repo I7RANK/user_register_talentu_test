@@ -6,23 +6,41 @@
   --color-white: #f1f1f1;
   --color-white-2: #fff;
   --color-dark: #2b2b2b;
+  --color-dark-2: #444444;
   --text-white: #999;
+  --text-dark: #f3f3f3;
 
-  --bg-talentu: #1a1550;
-  --input-color: #afa8ff;
-  --input-color-2: #685bff;
+  --bg-talentu-white: #1a1550;
+  --bg-talentu-dark: #3a3483;
+
+  --input-color-white: #afa8ff;
+  --input-color-white-2: #685bff;
+  --input-color-dark: #ffffff;
+  --input-color-dark-2: #c2bdff;
 }
 
 :root {
   --background: var(--color-white);
   --background-secondary: var(--color-white-2);
   --text-color: var(--text-white);
+  --bg-talentu: var(--bg-talentu-white);
+  --input-color: var(--input-color-white);
+  --input-color-2: var(--input-color-white-2);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: var(--color-dark);
+    --background-secondary: var(--color-dark-2);
+    --text-color: var(--text-dark);
+    --bg-talentu: var(--bg-talentu-dark);
+    --input-color: var(--input-color-dark);
+    --input-color-2: var(--input-color-dark-2);
   }
+}
+
+input {
+  background: transparent;
 }
 
 *,

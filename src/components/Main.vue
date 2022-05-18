@@ -4,8 +4,24 @@
       <UserForm @userListUpdated="this.userListUpdated()"/>
     </div>
 
-    <div class="table-content lg:col-span-2 mb-5 rounded-2xl shadow-md p-5 overflow-auto">
+    <div class="table-content lg:col-span-2 mb-5 rounded-2xl shadow-md p-5 overflow-auto relative">
       <UserTable :userList="userList" v-if="responseStatus === 200"/>
+
+      <div class="pagination-content w-full">
+        <ul class="flex justify-center">
+          <li class="mx-2 cursor-pointer" @click="currentPage > 1 ? currentPage-- : true">
+            {{ '<' }}
+          </li>
+          <li class="mx-1 cursor-pointer" @click="this.currentPage = numberPage"
+            :key="numberPage" v-for="numberPage in userData.total_pages">
+            <span v-if="numberPage === currentPage" class="current-page">{{ numberPage }}</span>
+            <span v-else>{{ numberPage }}</span>
+          </li>
+          <li class="mx-2 cursor-pointer" @click="currentPage < userData.total_pages ? currentPage++ : true">
+            {{ '>' }}
+          </li>
+        </ul>
+      </div>
     </div>
   </main>
 </template>
@@ -20,15 +36,21 @@ export default {
       userData: { data: [] },
       userList: [],
       responseStatus: 0,
+      currentPage: 1,
     };
   },
   components: {
     UserTable,
     UserForm,
   },
+  watch: {
+    currentPage() {
+      this.getUsers(this.currentPage);
+    }
+  },
   methods: {
-    async getUsers() {
-      const url = 'https://reqres.in/api/users?page=1';
+    async getUsers(page=1) {
+      const url = `https://reqres.in/api/users?page=${page}`;
 
       try {
         const res = await fetch(url);
@@ -43,7 +65,7 @@ export default {
     },
     userListUpdated() {
       this.userList = JSON.parse(localStorage.getItem('userList'));
-    }
+    },
   },
   mounted() {
     this.getUsers();
@@ -54,5 +76,10 @@ export default {
 <style>
 main div {
   background: var(--background-secondary);
+}
+
+.current-page {
+  text-shadow: 1px 1px 1px var(--input-color-2);
+  color: var(--input-color-2);
 }
 </style>
