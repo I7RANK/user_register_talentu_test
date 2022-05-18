@@ -1,14 +1,14 @@
-# .
+# Talentu Technical Test
+This web application obtains a list of users from an API to later save that list in the browser's localStorage and display them through a table, in addition to having a form that adds new users to the locally hosted list.
 
-This template should help get you started developing with Vue 3 in Vite.
+## Value added
+- Pagination to get all API users.
+- Auto Dark Mode when the device is in dark mode.
+- Spinner during Data request to the API.
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+## Main Stack
+- Vue
+- Tailwind
 
 ## Project Setup
 
@@ -20,6 +20,11 @@ npm install
 
 ```sh
 npm run dev
+```
+
+For host on local network
+```sh
+npm run dev -- --host
 ```
 
 ### Compile and Minify for Production
